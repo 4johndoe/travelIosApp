@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43347090277A2F340053EBE7 /* TravelDiscoveryLBTAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334708F277A2F340053EBE7 /* TravelDiscoveryLBTAApp.swift */; };
-		43347092277A2F340053EBE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43347091277A2F340053EBE7 /* ContentView.swift */; };
+		43347092277A2F340053EBE7 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43347091277A2F340053EBE7 /* DiscoverView.swift */; };
 		43347094277A2F360053EBE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43347093277A2F360053EBE7 /* Assets.xcassets */; };
 		43347097277A2F360053EBE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43347096277A2F360053EBE7 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		4334708C277A2F340053EBE7 /* TravelDiscoveryLBTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelDiscoveryLBTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4334708F277A2F340053EBE7 /* TravelDiscoveryLBTAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDiscoveryLBTAApp.swift; sourceTree = "<group>"; };
-		43347091277A2F340053EBE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		43347091277A2F340053EBE7 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		43347093277A2F360053EBE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43347096277A2F360053EBE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,8 +51,8 @@
 		4334708E277A2F340053EBE7 /* TravelDiscoveryLBTA */ = {
 			isa = PBXGroup;
 			children = (
+				4334709D277BAABF0053EBE7 /* Discover */,
 				4334708F277A2F340053EBE7 /* TravelDiscoveryLBTAApp.swift */,
-				43347091277A2F340053EBE7 /* ContentView.swift */,
 				43347093277A2F360053EBE7 /* Assets.xcassets */,
 				43347095277A2F360053EBE7 /* Preview Content */,
 			);
@@ -65,6 +65,14 @@
 				43347096277A2F360053EBE7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4334709D277BAABF0053EBE7 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				43347091277A2F340053EBE7 /* DiscoverView.swift */,
+			);
+			path = Discover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43347092277A2F340053EBE7 /* ContentView.swift in Sources */,
+				43347092277A2F340053EBE7 /* DiscoverView.swift in Sources */,
 				43347090277A2F340053EBE7 /* TravelDiscoveryLBTAApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

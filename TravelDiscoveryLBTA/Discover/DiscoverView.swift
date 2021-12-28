@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  DiscoverView.swift
 //  TravelDiscoveryLBTA
 //
 //  Created by Bogdan Demchenko on 27.12.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct DiscoverView: View {
     
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [
@@ -238,9 +238,9 @@ struct TrendingCreatorsView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct DiscoverView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        DiscoverView()
     }
 }
 
