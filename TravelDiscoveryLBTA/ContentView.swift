@@ -8,20 +8,56 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+    }
+    
     var body: some View {
+        
         NavigationView {
             
-            ScrollView{
+            ZStack {
                 
-                DiscoveryCategoriesView()
+                LinearGradient(gradient: Gradient(colors: [Color(red: 0.998, green: 0.722, blue: 0.267), Color(red: 0.958, green: 0.493, blue: 0.126)]), startPoint: .top, endPoint: .center)
+                    .ignoresSafeArea()
                 
-                PopularDestinationView()
+                Color(.init(gray: 0.95, alpha: 1))
+                    .offset(y: 400)
                 
-                PopularRestaurantsView()
-                
-                TrendingCreatorsView()
-
-            }.navigationTitle("Discover")
+                ScrollView{
+                    
+                    HStack {
+                        
+                        Image(systemName: "magnifyingglass")
+                        Text("Where do you want to go?")
+                        Spacer()
+                        
+                    }.font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color(.init(white: 1, alpha: 0.3)))
+                    .cornerRadius(10)
+                    .padding(16)
+                    
+                    DiscoveryCategoriesView()
+                    
+                    VStack {
+                        
+                        PopularDestinationView()
+                        
+                        PopularRestaurantsView()
+                        
+                        TrendingCreatorsView()
+                    }.background(Color(.init(gray: 0.95, alpha: 1)))
+                        .cornerRadius(16)
+                        .padding(.top, 32)
+                }
+            }
+            
+            .navigationTitle("Discover")
 
         }
     }
@@ -75,7 +111,7 @@ struct PopularDestinationView: View {
                                 .foregroundColor(.gray)
                         }
 //                            .frame(width: 125)
-                            .background(Color(.init(white: 0.9, alpha: 1)))
+                            .background(Color.white)
                             .cornerRadius(5)
                             .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
                             .padding(.bottom)
@@ -143,7 +179,7 @@ struct PopularRestaurantsView: View {
                             Spacer()
                         }
                             .frame(width: 240)
-                            .background(Color(.init(white: 0.9, alpha: 1)))
+                            .background(Color.white)
                             .cornerRadius(5)
                             .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
                             .padding(.bottom)
@@ -229,13 +265,15 @@ struct DiscoveryCategoriesView: View {
                     VStack (spacing: 4) {
                         Image(systemName: category.imageName)
                             .font(.system(size: 20))
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color(red: 0.983, green: 0.631, blue: 0.213))
                             .frame(width: 64, height: 64)
-                            .background(Color.gray)
+                            .background(Color.white)
                             .cornerRadius(64)
-                            .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
+//                            .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
                         Text(category.name)
                             .font(.system(size: 12, weight: .semibold))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
                     }.frame(width: 68)
                 }
             }.padding(.horizontal)
