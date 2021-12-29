@@ -21,19 +21,23 @@ struct DiscoveryCategoriesView: View {
         ScrollView (.horizontal, showsIndicators: false) {
             HStack(alignment: .top, spacing: 14) {
                 ForEach (categories, id: \.self) { category in
-                    VStack (spacing: 4) {
-                        Image(systemName: category.imageName)
-                            .font(.system(size: 20))
-                            .foregroundColor(Color(red: 0.983, green: 0.631, blue: 0.213))
-                            .frame(width: 64, height: 64)
-                            .background(Color.white)
-                            .cornerRadius(64)
-//                            .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
-                        Text(category.name)
-                            .font(.system(size: 12, weight: .semibold))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                    }.frame(width: 68)
+                    NavigationLink(
+                        destination: Text("Destination"),
+                        label: {
+                            VStack (spacing: 4) {
+                                Image(systemName: category.imageName)
+                                    .font(.system(size: 20))
+                                    .foregroundColor(Color(red: 0.983, green: 0.631, blue: 0.213))
+                                    .frame(width: 64, height: 64)
+                                    .background(Color.white)
+                                    .cornerRadius(64)
+        //                            .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
+                                Text(category.name)
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
+                            }.frame(width: 68)
+                        })
                 }
             }.padding(.horizontal)
         }
@@ -42,6 +46,7 @@ struct DiscoveryCategoriesView: View {
 
 struct DiscoveryCategoriesView_Previews: PreviewProvider {
     static var previews: some View {
+        DiscoverView()
         DiscoveryCategoriesView()
     }
 }
