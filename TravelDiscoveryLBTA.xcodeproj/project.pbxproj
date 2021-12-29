@@ -19,6 +19,7 @@
 		43B7CF9B277BAF4800DEB169 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9A277BAF4800DEB169 /* Restaurant.swift */; };
 		43B7CF9D277BAF6800DEB169 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9C277BAF6800DEB169 /* Users.swift */; };
 		43B7CF9F277BAF7200DEB169 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9E277BAF7200DEB169 /* Category.swift */; };
+		43ECE98A277D073C00145B98 /* TileModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECE989277D073C00145B98 /* TileModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		43B7CF9A277BAF4800DEB169 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		43B7CF9C277BAF6800DEB169 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		43B7CF9E277BAF7200DEB169 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		43ECE989277D073C00145B98 /* TileModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		4334708E277A2F340053EBE7 /* TravelDiscoveryLBTA */ = {
 			isa = PBXGroup;
 			children = (
+				43ECE988277D072900145B98 /* Utils */,
 				433470A7277BAEB50053EBE7 /* Models */,
 				4334709D277BAABF0053EBE7 /* Discover */,
 				4334708F277A2F340053EBE7 /* TravelDiscoveryLBTAApp.swift */,
@@ -105,6 +108,14 @@
 				43B7CF9E277BAF7200DEB169 /* Category.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		43ECE988277D072900145B98 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				43ECE989277D073C00145B98 /* TileModifier.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				433470A4277BAE3B0053EBE7 /* TrendingCreatorsView.swift in Sources */,
+				43ECE98A277D073C00145B98 /* TileModifier.swift in Sources */,
 				43B7CF9F277BAF7200DEB169 /* Category.swift in Sources */,
 				43B7CF9D277BAF6800DEB169 /* Users.swift in Sources */,
 				433470A6277BAE550053EBE7 /* DiscoveryCategoriesView.swift in Sources */,
