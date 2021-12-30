@@ -15,6 +15,9 @@
 		433470A2277BAE030053EBE7 /* PopularRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433470A1277BAE030053EBE7 /* PopularRestaurantsView.swift */; };
 		433470A4277BAE3B0053EBE7 /* TrendingCreatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433470A3277BAE3B0053EBE7 /* TrendingCreatorsView.swift */; };
 		433470A6277BAE550053EBE7 /* DiscoveryCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 433470A5277BAE550053EBE7 /* DiscoveryCategoriesView.swift */; };
+		438478B6277E5A3100574C2A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 438478B5277E5A3100574C2A /* Kingfisher */; };
+		438478B9277E5A6E00574C2A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 438478B8277E5A6E00574C2A /* SDWebImage */; };
+		438478BB277E5A6E00574C2A /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 438478BA277E5A6E00574C2A /* SDWebImageMapKit */; };
 		43B7CF99277BAF2F00DEB169 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF98277BAF2F00DEB169 /* Destination.swift */; };
 		43B7CF9B277BAF4800DEB169 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9A277BAF4800DEB169 /* Restaurant.swift */; };
 		43B7CF9D277BAF6800DEB169 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9C277BAF6800DEB169 /* Users.swift */; };
@@ -44,6 +47,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438478B9277E5A6E00574C2A /* SDWebImage in Frameworks */,
+				438478BB277E5A6E00574C2A /* SDWebImageMapKit in Frameworks */,
+				438478B6277E5A3100574C2A /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +140,11 @@
 			dependencies = (
 			);
 			name = TravelDiscoveryLBTA;
+			packageProductDependencies = (
+				438478B5277E5A3100574C2A /* Kingfisher */,
+				438478B8277E5A6E00574C2A /* SDWebImage */,
+				438478BA277E5A6E00574C2A /* SDWebImageMapKit */,
+			);
 			productName = TravelDiscoveryLBTA;
 			productReference = 4334708C277A2F340053EBE7 /* TravelDiscoveryLBTA.app */;
 			productType = "com.apple.product-type.application";
@@ -162,6 +173,10 @@
 				Base,
 			);
 			mainGroup = 43347083277A2F340053EBE7;
+			packageReferences = (
+				438478B4277E5A3100574C2A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				438478B7277E5A6E00574C2A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 4334708D277A2F340053EBE7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -401,6 +416,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		438478B4277E5A3100574C2A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		438478B7277E5A6E00574C2A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		438478B5277E5A3100574C2A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 438478B4277E5A3100574C2A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		438478B8277E5A6E00574C2A /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 438478B7277E5A6E00574C2A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		438478BA277E5A6E00574C2A /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 438478B7277E5A6E00574C2A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 43347084277A2F340053EBE7 /* Project object */;
 }

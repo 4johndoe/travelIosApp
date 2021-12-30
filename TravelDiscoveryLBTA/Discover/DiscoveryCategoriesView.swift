@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Kingfisher
+//import SDWebImage
 
 struct DiscoveryCategoriesView: View {
     
@@ -45,7 +47,7 @@ struct DiscoveryCategoriesView: View {
 }
 
 struct Place: Decodable, Hashable {
-    let id, name, thumbnail: String
+    let name, thumbnail: String
 }
 
 //
@@ -130,7 +132,8 @@ struct CategoryDetailsView: View {
                         
                         ForEach(vm.places, id: \.self) { place in
                             VStack(alignment: .leading, spacing: 0){
-                                Image(place.thumbnail)
+                                KFImage(URL(string: place.thumbnail)!)
+                                    .fade(duration: 0.25)
                                     .resizable()
                                     .scaledToFill()
                                 Text(place.name)
