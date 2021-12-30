@@ -44,18 +44,39 @@ struct DiscoveryCategoriesView: View {
     }
 }
 
+struct Place: Decodable, Hashable {
+    let name, thumbnail: String
+}
+
 //
 class SomeObservableObjectForUserInterface: ObservableObject {
     
     @Published var isLoading = true
-    @Published var places = [Int]()
+    @Published var places = [Place]()
     
     init () {
         // network code here
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.isLoading = false
-            self.places = [1, 2]
-        }
+        
+        guard let url = URL(
+            string:"https://travel.letsbuildthatapp.com/travel_discovery/category?name=art") else { return }
+        
+        URLSession.shared.dataTask(with: url) {(data, resp, err) in
+            
+            // check status code of resp
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                
+                guard let data = data else { return }
+                
+                do {
+                    self.places = try JSONDecoder().decode([Place].self, from: data)
+                } catch {
+                    print("Failed to decode JSON:", error)
+                }
+                
+                self.isLoading = false
+            }
+        }.resume()
     }
     
 }
@@ -100,12 +121,12 @@ struct CategoryDetailsView: View {
                 
                 ScrollView {
                     
-                    ForEach(vm.places, id: \.self) { num in
+                    ForEach(vm.places, id: \.self) { place in
                         VStack(alignment: .leading, spacing: 0){
-                            Image("art1")
+                            Image(place.thumbnail)
                                 .resizable()
                                 .scaledToFill()
-                            Text("Demo123456")
+                            Text(place.name)
                                 .font(.system(size: 12, weight: .semibold))
                                 .padding()
                         }.asTile()
