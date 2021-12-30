@@ -45,7 +45,7 @@ struct DiscoveryCategoriesView: View {
 }
 
 struct Place: Decodable, Hashable {
-    let name, thumbnail: String
+    let id, name, thumbnail: String
 }
 
 //
@@ -53,6 +53,8 @@ class SomeObservableObjectForUserInterface: ObservableObject {
     
     @Published var isLoading = true
     @Published var places = [Place]()
+    
+    @Published var errorMessage = ""
     
     init () {
         // network code here
@@ -72,6 +74,7 @@ class SomeObservableObjectForUserInterface: ObservableObject {
                     self.places = try JSONDecoder().decode([Place].self, from: data)
                 } catch {
                     print("Failed to decode JSON:", error)
+                    self.errorMessage = error.localizedDescription
                 }
                 
                 self.isLoading = false
@@ -119,18 +122,23 @@ struct CategoryDetailsView: View {
                 
             } else {
                 
-                ScrollView {
+                ZStack {
                     
-                    ForEach(vm.places, id: \.self) { place in
-                        VStack(alignment: .leading, spacing: 0){
-                            Image(place.thumbnail)
-                                .resizable()
-                                .scaledToFill()
-                            Text(place.name)
-                                .font(.system(size: 12, weight: .semibold))
+                    Text(vm.errorMessage)
+                    
+                    ScrollView {
+                        
+                        ForEach(vm.places, id: \.self) { place in
+                            VStack(alignment: .leading, spacing: 0){
+                                Image(place.thumbnail)
+                                    .resizable()
+                                    .scaledToFill()
+                                Text(place.name)
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .padding()
+                            }.asTile()
                                 .padding()
-                        }.asTile()
-                            .padding()
+                        }
                     }
                 }
             }
