@@ -22,7 +22,7 @@ struct DiscoveryCategoriesView: View {
             HStack(alignment: .top, spacing: 14) {
                 ForEach (categories, id: \.self) { category in
                     NavigationLink(
-                        destination: Text("Destination"),
+                        destination: CategoryDetailsView(),
                         label: {
                             VStack (spacing: 4) {
                                 Image(systemName: category.imageName)
@@ -44,9 +44,32 @@ struct DiscoveryCategoriesView: View {
     }
 }
 
+struct CategoryDetailsView: View {
+    var body: some View {
+        ScrollView {
+            
+            ForEach(0..<5, id: \.self) { num in
+                VStack(alignment: .leading, spacing: 0){
+                    Image("art1")
+                        .resizable()
+                        .scaledToFill()
+                    Text("Demo123")
+                        .font(.system(size: 12, weight: .semibold))
+                        .padding()
+                }.asTile()
+                    .padding()
+            }
+            
+        }.navigationBarTitle("Category", displayMode: .inline)
+    }
+}
+
 struct DiscoveryCategoriesView_Previews: PreviewProvider {
     static var previews: some View {
+        NavigationView {
+            CategoryDetailsView()
+        }
         DiscoverView()
-        DiscoveryCategoriesView()
+//        DiscoveryCategoriesView()
     }
 }
