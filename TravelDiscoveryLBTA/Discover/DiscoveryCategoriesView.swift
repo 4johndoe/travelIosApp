@@ -44,23 +44,49 @@ struct DiscoveryCategoriesView: View {
     }
 }
 
+//
+class SomeObservableObjectForUserInterface: ObservableObject {
+    
+    @Published var isLoading = true
+    
+    init () {
+        // network code here
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.isLoading = false
+        }
+    }
+    
+}
+
 struct CategoryDetailsView: View {
+    
+    @ObservedObject var vm = SomeObservableObjectForUserInterface()
+    
     var body: some View {
-        ScrollView {
+        
+        ZStack {
             
-            ForEach(0..<5, id: \.self) { num in
-                VStack(alignment: .leading, spacing: 0){
-                    Image("art1")
-                        .resizable()
-                        .scaledToFill()
-                    Text("Demo123")
-                        .font(.system(size: 12, weight: .semibold))
-                        .padding()
-                }.asTile()
-                    .padding()
+            if vm.isLoading {
+                Text("still loading")
+            } else {
+                
+                ScrollView {
+                    
+                    ForEach(0..<5, id: \.self) { num in
+                        VStack(alignment: .leading, spacing: 0){
+                            Image("art1")
+                                .resizable()
+                                .scaledToFill()
+                            Text("Demo123456")
+                                .font(.system(size: 12, weight: .semibold))
+                                .padding()
+                        }.asTile()
+                            .padding()
+                    }
+                }
             }
-            
-        }.navigationBarTitle("Category", displayMode: .inline)
+        }
+        .navigationBarTitle("Category", displayMode: .inline)
     }
 }
 
