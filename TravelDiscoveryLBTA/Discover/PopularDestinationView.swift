@@ -50,6 +50,7 @@ struct PopularDestinationDetailsView: View {
     let destination: Destination
     
     @State var region: MKCoordinateRegion
+    @State var isShowingAttractions = true
     
     init(destination: Destination) {
         self.destination = destination
@@ -91,17 +92,26 @@ struct PopularDestinationDetailsView: View {
             HStack {
                 Text("Location")
                     .font(.system(size: 18, weight: .semibold))
+                
                 Spacer()
+                
+                Button(action: { isShowingAttractions.toggle() }, label: {
+                    Text("\(isShowingAttractions ? "Hide" : "Show") Attractoins")
+                        .font(.system(size: 14, weight: .semibold))
+                })
+                Toggle("", isOn: $isShowingAttractions)
+                    .labelsHidden()
+                
             }.padding(.horizontal)
             
 //            Map(coordinateRegion: $region)
 //                .frame(height: 300)
 //
-            Map(coordinateRegion: $region, annotationItems: attractions) {
+            Map(coordinateRegion: $region, annotationItems: isShowingAttractions ? attractions : []) {
                 attraction in
                 MapMarker(
                     coordinate: .init(latitude: attraction.latitude, longitude: attraction.longitude),
-                    tint: .red)
+                    tint: .blue)
             }
             .frame(height: 300)
 
@@ -109,7 +119,9 @@ struct PopularDestinationDetailsView: View {
     }
     
     let attractions: [Attraction] = [
-        .init(name: "Eiffel Tower", latitude: 48.859565, longitude: 2.353235)
+        .init(name: "Eiffel Tower", latitude: 48.858605, longitude: 2.2946),
+        .init(name: "Champs-Elysees", latitude: 48.866867, longitude: 2.311780),
+        .init(name: "Eiffel Tower", latitude: 48.860288, longitude: 2.337789),
     ]
 }
 
