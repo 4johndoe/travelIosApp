@@ -55,7 +55,7 @@ struct PopularDestinationDetailsView: View {
         self.destination = destination
         self._region = State(initialValue: MKCoordinateRegion(
             center: .init(latitude: destination.latitude, longitude: destination.longitude),
-            span: .init(latitudeDelta: 0.01, longitudeDelta: 0.01)))
+            span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
     }
     
     var body: some View{
@@ -94,11 +94,30 @@ struct PopularDestinationDetailsView: View {
                 Spacer()
             }.padding(.horizontal)
             
-            Map(coordinateRegion: $region)
-                .frame(height: 300)
-            
+//            Map(coordinateRegion: $region)
+//                .frame(height: 300)
+//
+            Map(coordinateRegion: $region, annotationItems: attractions) {
+                attraction in
+                MapMarker(
+                    coordinate: .init(latitude: attraction.latitude, longitude: attraction.longitude),
+                    tint: .red)
+            }
+            .frame(height: 300)
+
         }.navigationBarTitle(destination.name, displayMode: .inline)
     }
+    
+    let attractions: [Attraction] = [
+        .init(name: "Eiffel Tower", latitude: 48.859565, longitude: 2.353235)
+    ]
+}
+
+struct Attraction: Identifiable {
+    let id = UUID().uuidString
+    
+    let name: String
+    let latitude, longitude: Double
 }
 
 struct PopularDestinationTile: View {
