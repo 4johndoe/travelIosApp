@@ -12,7 +12,7 @@ struct PopularDestinationView: View {
     
     let destinations: [Destination] = [
         .init(name: "Paris", country: "France", imageName: "paris", latitude: 48.859565, longitude: 2.353235),
-        .init(name: "Tokio", country: "Japan", imageName: "japan", latitude: 48.859565, longitude: 2.353235),
+        .init(name: "Tokyo", country: "Japan", imageName: "japan", latitude: 48.859565, longitude: 2.353235),
         .init(name: "New York", country: "US", imageName: "newyork", latitude: 48.859565, longitude: 2.353235),
     ]
     
@@ -45,7 +45,48 @@ struct PopularDestinationView: View {
     }
 }
 
+struct DestinationDetails: Decodable {
+    let description: String
+    let photos: [String]
+}
+
+class DestinationDetailsViewModel: ObservableObject {
+    
+    @Published var isLoading = true
+    @Published var destinationDetails: DestinationDetails?
+    
+    init(name: String) {
+        
+        // lets make network call
+        
+        let urlString = "https://travel.letsbuildthatapp.com/travel_discovery/destination?name=\(name.lowercased())"
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        guard let url = URL(
+            string: urlString
+        ) else { return }
+                
+        URLSession.shared.dataTask(with: url) { (data, resp, err) in
+            // check err & resp
+            
+            DispatchQueue.main.async {
+                
+                guard let data = data else { return }
+                do {
+                    
+                    self.destinationDetails = try JSONDecoder().decode(DestinationDetails.self, from: data)
+                } catch {
+                    print("Failed to decode JSON,", error)
+                }
+            }
+            
+        }.resume()
+    }
+}
+
 struct PopularDestinationDetailsView: View {
+    
+    @ObservedObject var vm: DestinationDetailsViewModel
     
     let destination: Destination
     
@@ -57,18 +98,15 @@ struct PopularDestinationDetailsView: View {
         self._region = State(initialValue: MKCoordinateRegion(
             center: .init(latitude: destination.latitude, longitude: destination.longitude),
             span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
+        
+        self.vm = .init(name: destination.name)
     }
     
     var body: some View{
         
         ScrollView {
 
-            DestinationHeaderContainer(imageUrlStrings: [
-                "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/7156c3c6-945e-4284-a796-915afdc158b5",
-                "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/b1642068-5624-41cf-83f1-3f6dff8c1702",
-                "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/6982cc9d-3104-4a54-98d7-45ee5d117531",
-                "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/2240d474-2237-4cd3-9919-562cd1bb439e",
-              ])
+            DestinationHeaderContainer(imageUrlStrings: vm.destinationDetails?.photos ?? [])
                 .frame(height: 250)
             
             VStack(alignment: .leading){
@@ -197,10 +235,10 @@ struct PopularDestinationTile: View {
 
 struct PopularDestinationView_Previews: PreviewProvider {
     static var previews: some View {
-//        DiscoverView()
+        DiscoverView()
 //        PopularDestinationView()
-        NavigationView {
-            PopularDestinationDetailsView(destination: .init(name: "Paris" ,country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235  ))
-        }
+//        NavigationView {
+//            PopularDestinationDetailsView(destination: .init(name: "Paris" ,country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235  ))
+//        }
     }
 }
