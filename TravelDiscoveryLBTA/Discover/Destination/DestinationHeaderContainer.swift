@@ -9,13 +9,13 @@ import SwiftUI
 
 struct DestinationHeaderContainer: UIViewControllerRepresentable {
     
+    let imageNames: [String]
+    
     typealias UIViewControllerType = UIViewController
     
     func makeUIViewController(context: Context) -> UIViewController {
-//        let redVC = UIHostingController(rootView: Text("First view controller"))
-////        redVC.view.backgroundColor = .red
-//        return redVC
-        let pvc = CustomPageViewController()
+
+        let pvc = CustomPageViewController(imageNames: imageNames)
         return pvc
     }
     
@@ -50,24 +50,25 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDataSo
         return allControllers[index + 1]
     }
     
-    
-    let firstVC = UIHostingController(rootView: Text("First"))
-    let secondVC = UIHostingController(rootView: Text("Second"))
-    let thirdVC = UIHostingController(rootView: Text("Third"))
-    
-    lazy var allControllers: [UIViewController] = [
-        firstVC, secondVC, thirdVC
-    ]
+    var allControllers: [UIViewController] = []
 
     
-    init() {
+    init(imageNames: [String]) {
         
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.systemGray5
         UIPageControl.appearance().currentPageIndicatorTintColor = .purple
         
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
-        setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        allControllers = imageNames.map({ imageName in
+            let hostingController = UIHostingController(rootView: Image(imageName)
+                                                            .resizable()
+                                                            .scaledToFill()
+            )
+            return hostingController
+        })
+        
+        setViewControllers([allControllers[0]], direction: .forward, animated: true, completion: nil)
         
         self.dataSource = self
         self.delegate = self
@@ -80,7 +81,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDataSo
 
 struct DestinationHeaderContainer_Previews: PreviewProvider {
     static var previews: some View {
-        DestinationHeaderContainer()
+        DestinationHeaderContainer(imageNames: ["japan", "eiffel_tower"])
         NavigationView {
             PopularDestinationDetailsView(destination: .init(name: "Paris" ,country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235  ))
         }
