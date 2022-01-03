@@ -32,7 +32,9 @@ struct PopularDestinationView: View {
                     ForEach(destinations, id: \.self) { destination in
                         
                         NavigationLink (
-                            destination: PopularDestinationDetailsView(destination: destination),
+                            destination:
+                                NavigationLazyView(
+                                    PopularDestinationDetailsView(destination: destination)),
                             label: {
                                 PopularDestinationTile(destination: destination)
                                     .padding(.bottom)
@@ -105,9 +107,12 @@ struct PopularDestinationDetailsView: View {
     var body: some View{
         
         ScrollView {
-
-            DestinationHeaderContainer(imageUrlStrings: vm.destinationDetails?.photos ?? [])
-                .frame(height: 250)
+            
+            if let photos = vm.destinationDetails?.photos {
+                
+                DestinationHeaderContainer(imageUrlStrings: vm.destinationDetails?.photos ?? [])
+                    .frame(height: 250)
+            }
             
             VStack(alignment: .leading){
                 Text(destination.name)
@@ -122,7 +127,7 @@ struct PopularDestinationDetailsView: View {
                     }
                 }
                 
-                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
+                Text(vm.destinationDetails?.description ?? "")
                     .padding(.top, 4)
                     .font(.system(size: 14))
                 
