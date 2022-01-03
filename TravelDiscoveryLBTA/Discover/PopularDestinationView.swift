@@ -63,7 +63,12 @@ struct PopularDestinationDetailsView: View {
         
         ScrollView {
 
-            DestinationHeaderContainer(imageNames: ["eiffel_tower", "art1", "art2"])
+            DestinationHeaderContainer(imageUrlStrings: [
+                "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/7156c3c6-945e-4284-a796-915afdc158b5",
+                "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/b1642068-5624-41cf-83f1-3f6dff8c1702",
+                "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/6982cc9d-3104-4a54-98d7-45ee5d117531",
+                "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/2240d474-2237-4cd3-9919-562cd1bb439e",
+              ])
                 .frame(height: 250)
             
             VStack(alignment: .leading){
