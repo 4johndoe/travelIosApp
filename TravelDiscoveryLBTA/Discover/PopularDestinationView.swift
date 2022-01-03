@@ -59,14 +59,33 @@ struct PopularDestinationDetailsView: View {
             span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
     }
     
+    // what do i mean by a container?
+    struct Container: UIViewControllerRepresentable {
+        
+        typealias UIViewControllerType = UIViewController
+        
+        func makeUIViewController(context: Context) -> UIViewController {
+            let redVC = UIViewController()
+            redVC.view.backgroundColor = .green
+            return redVC
+        }
+        
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+            
+        }
+    }
+    
     var body: some View{
         
         ScrollView {
-            Image(destination.imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 150)
-                .clipped()
+
+            Container()
+            
+//            Image(destination.imageName)
+//                .resizable()
+//                .scaledToFill()
+                .frame(height: 250)
+//                .clipped()
             
             VStack(alignment: .leading){
                 Text(destination.name)
