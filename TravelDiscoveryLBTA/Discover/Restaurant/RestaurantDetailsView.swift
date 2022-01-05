@@ -8,18 +8,26 @@
 import SwiftUI
 
 struct RestaurantDetailsView: View {
+    
+    let restaurant: Restaurant
+    
     var body: some View {
         ScrollView {
+            
+            VStack {
+                
+            }
+            
             Text("Details")
-        }.navigationTitle("Restaurant Details")
-            .navigationBarTitle("Restaurant Details", displayMode: .inline)
+        }
+        .navigationBarTitle("Restaurant Details", displayMode: .inline)
     }
 }
     
 struct RestaurantDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RestaurantDetailsView()
+            RestaurantDetailsView(restaurant: .init(name: "Japan's Finest Tapas", imageName: "tapas"))
         }
     }
 }

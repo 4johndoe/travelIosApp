@@ -29,7 +29,7 @@ struct PopularRestaurantsView: View {
                 HStack(spacing: 8) {
                     ForEach(restaurants, id: \.self) { restaurant in
                         NavigationLink(
-                            destination: RestaurantDetailsView(),
+                            destination: RestaurantDetailsView(restaurant: restaurant),
                             label: {
                                 RestaurantTile(restaurant: restaurant)
                                     .foregroundColor(Color(.label))
