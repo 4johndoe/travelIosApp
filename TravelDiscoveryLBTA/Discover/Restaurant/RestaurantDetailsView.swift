@@ -61,6 +61,35 @@ struct RestaurantDetailsView: View {
                     .padding(.top, 8)
                     .font(.system(size: 14, weight: .regular))
             }.padding()
+            
+            HStack {
+                Text("Popular Dishes")
+                    .font(.system(size: 16, weight: .bold))
+                Spacer()
+            }.padding(.horizontal)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    ForEach(0..<5, id: \.self) {num in
+                        VStack (alignment: .leading) {
+                            Image("tapas")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(height: 80)
+                                .cornerRadius(5)
+                                .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.gray))
+                                .shadow(radius: 2)
+                                .padding(.vertical, 2)
+                            
+                            Text("Japanese Tapas")
+                                .font(.system(size: 14, weight: .bold))
+                            Text("88 photos")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 12, weight: .regular))
+                        }
+                    }
+                }.padding(.horizontal)
+            }
         }
         .navigationBarTitle("Restaurant Details", displayMode: .inline)
     }
