@@ -9,13 +9,18 @@ import SwiftUI
 import Kingfisher
 
 struct RestaurantDetails: Decodable {
-    
     let description: String
+    let popularDishes: [Dish]
+}
+
+struct Dish: Decodable, Hashable {
+    let name, price, photo: String
+    let numPhotos: Int
 }
 
 class RestaurantDetailsViewModel: ObservableObject {
-    @Published var isLoading = true
     
+    @Published var isLoading = true
     @Published var details: RestaurantDetails?
     
     init() {
@@ -29,7 +34,7 @@ class RestaurantDetailsViewModel: ObservableObject {
             guard let data = data else { return }
             
             DispatchQueue.main.async {
-                self.details = try? JSONDecoder().decode(RestaurantDetails.self, from: data) 
+                self.details = try? JSONDecoder().decode(RestaurantDetails.self, from: data)
             }
             
         }.resume()
@@ -43,8 +48,7 @@ struct RestaurantDetailsView: View {
     let restaurant: Restaurant
     
     var body: some View {
-        Text(vm.details?.description ?? "")
-        
+
         ScrollView {
             
             ZStack (alignment: .bottomLeading) {
@@ -90,7 +94,7 @@ struct RestaurantDetailsView: View {
                     }.foregroundColor(.orange)
                 }
                 
-                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.")
+                Text(vm.details?.description ?? "")
                     .padding(.top, 8)
                     .font(.system(size: 14, weight: .regular))
             }.padding()
@@ -103,9 +107,9 @@ struct RestaurantDetailsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(simpleDishPhotos, id: \.self) {photo in
+                    ForEach(vm.details?.popularDishes ?? [], id: \.self) {dish in
                         VStack (alignment: .leading) {
-                            KFImage(URL(string: photo))
+                            KFImage(URL(string: dish.photo))
 //                            Image("tapas")
                                 .resizable()
                                 .scaledToFill()
@@ -115,9 +119,9 @@ struct RestaurantDetailsView: View {
                                 .shadow(radius: 2)
                                 .padding(.vertical, 2)
                             
-                            Text("Japanese Tapas")
+                            Text(dish.name)
                                 .font(.system(size: 14, weight: .bold))
-                            Text("88 photos")
+                            Text("\(dish.numPhotos) photos")
                                 .foregroundColor(.gray)
                                 .font(.system(size: 12, weight: .regular))
                         }
@@ -127,12 +131,6 @@ struct RestaurantDetailsView: View {
         }
         .navigationBarTitle("Restaurant Details", displayMode: .inline)
     }
-    
-    let simpleDishPhotos = [
-        "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/0d1d2e79-2f10-4cfd-82da-a1c2ab3638d2",
-        "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/3a352f87-3dc1-4fa7-affe-fb12fa8691fe",
-        "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/20a6783b-3de7-4e58-9e22-bcc6a43b6df6",
-    ]
 }
     
 struct RestaurantDetailsView_Previews: PreviewProvider {
