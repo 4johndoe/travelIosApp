@@ -6,12 +6,45 @@
 //
 
 import SwiftUI
+import Kingfisher
+
+struct RestaurantDetails: Decodable {
+    
+    let description: String
+}
+
+class RestaurantDetailsViewModel: ObservableObject {
+    @Published var isLoading = true
+    
+    @Published var details: RestaurantDetails?
+    
+    init() {
+        // fetch my NESTED JSON here
+        let urlString = "https://travel.letsbuildthatapp.com/travel_discovery/restaurant?id=0"
+        
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { (data, resp, err) in
+            // handle your erors properly
+            
+            guard let data = data else { return }
+            
+            DispatchQueue.main.async {
+                self.details = try? JSONDecoder().decode(RestaurantDetails.self, from: data) 
+            }
+            
+        }.resume()
+    }
+}
 
 struct RestaurantDetailsView: View {
+    
+    @ObservedObject var vm = RestaurantDetailsViewModel()
     
     let restaurant: Restaurant
     
     var body: some View {
+        Text(vm.details?.description ?? "")
+        
         ScrollView {
             
             ZStack (alignment: .bottomLeading) {
@@ -70,9 +103,10 @@ struct RestaurantDetailsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(0..<5, id: \.self) {num in
+                    ForEach(simpleDishPhotos, id: \.self) {photo in
                         VStack (alignment: .leading) {
-                            Image("tapas")
+                            KFImage(URL(string: photo))
+//                            Image("tapas")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(height: 80)
@@ -93,6 +127,12 @@ struct RestaurantDetailsView: View {
         }
         .navigationBarTitle("Restaurant Details", displayMode: .inline)
     }
+    
+    let simpleDishPhotos = [
+        "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/0d1d2e79-2f10-4cfd-82da-a1c2ab3638d2",
+        "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/3a352f87-3dc1-4fa7-affe-fb12fa8691fe",
+        "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/20a6783b-3de7-4e58-9e22-bcc6a43b6df6",
+    ]
 }
     
 struct RestaurantDetailsView_Previews: PreviewProvider {
