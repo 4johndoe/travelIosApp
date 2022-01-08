@@ -11,6 +11,19 @@ import Kingfisher
 struct RestaurantDetails: Decodable {
     let description: String
     let popularDishes: [Dish]
+    let photos: [String]
+    let reviews: [Review]
+}
+
+struct Review: Decodable, Hashable {
+    let user: ReviewUser
+    let rating: Int
+    let text: String
+}
+
+struct ReviewUser: Decodable, Hashable {
+    let id: Int
+    let username, firstName, lastName, profileImage: String
 }
 
 struct Dish: Decodable, Hashable {
@@ -94,17 +107,23 @@ struct RestaurantDetailsView: View {
                     }.foregroundColor(.orange)
                 }
                 
-                Text(vm.details?.description ?? "")
-                    .padding(.top, 8)
-                    .font(.system(size: 14, weight: .regular))
-            }.padding()
+                HStack { Spacer() }
+                
+            }.padding(.top)
+                .padding(.horizontal)
+            
+            Text(vm.details?.description ?? "")
+                .padding(.top, 8)
+                .font(.system(size: 14, weight: .regular))
+                .padding(.horizontal)
+                .padding(.bottom)
             
             HStack {
                 Text("Popular Dishes")
                     .font(.system(size: 16, weight: .bold))
                 Spacer()
             }.padding(.horizontal)
-            
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(vm.details?.popularDishes ?? [], id: \.self) {dish in
@@ -112,6 +131,48 @@ struct RestaurantDetailsView: View {
                     }
                 }.padding(.horizontal)
             }
+            
+            HStack {
+                Text("Customer Reviews")
+                    .font(.system(size: 16, weight: .bold))
+                Spacer()
+            }.padding(.horizontal)
+            
+            if let reviews = vm.details?.reviews {
+                ForEach(reviews, id: \.self) { review in
+                    VStack {
+                        HStack {
+                            KFImage(URL(string: review.user.profileImage))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 44)
+                                .clipShape(Circle())
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("\(review.user.firstName) \(review.user.lastName)")
+                                    .font(.system(size: 14, weight: .bold))
+                                HStack(spacing: 1) {
+                                    ForEach(0..<review.rating, id: \.self) { num in
+                                        Image(systemName: "star.fill")
+                                    }.foregroundColor(.orange)
+                                    
+                                    ForEach(0..<5 - review.rating, id: \.self) { num in
+                                        Image(systemName: "star.fill")
+                                    }.foregroundColor(.gray)
+                                }
+                                .font(.system(size: 12))
+                            }
+                            
+                            Spacer()
+                            Text("Dec 2021")
+                        }
+                        Text(review.text)
+                    }
+                    .padding(.top, 8)
+                    .padding(.horizontal)
+                }
+            }
+            
         }
         .navigationBarTitle("Restaurant Details", displayMode: .inline)
     }
