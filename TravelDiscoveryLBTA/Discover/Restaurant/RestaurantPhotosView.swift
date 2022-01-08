@@ -12,23 +12,17 @@ struct RestaurantPhotosView: View {
         ScrollView {
             LazyVGrid(
                 columns: [
-                    GridItem(.fixed(100)),
-                    GridItem(.fixed(100)),
-                    GridItem(.fixed(100)),
+                    GridItem(.fixed(125), spacing: 4),
+                    GridItem(.fixed(125), spacing: 4),
+                    GridItem(.fixed(125)),
                 ],
-                content: {
-                    Text("Placeholder")
-                        .padding()
-                        .background(.red)
-                    Text("Placeholder")
-                        .padding()
-                        .background(.red)
-                    Text("Placeholder")
-                        .padding()
-                        .background(.red)
-                    Text("Placeholder")
-                        .padding()
-                        .background(.red)
+                spacing: 4, content: {
+                    
+                    ForEach(0..<15, id: \.self) { num in
+                        Text("Placeholder")
+                            .padding()
+                            .background(.red)
+                    }
                 })
         }.navigationBarTitle("All Photos", displayMode: .inline)
     }
@@ -37,5 +31,6 @@ struct RestaurantPhotosView: View {
 struct RestaurantPhotosView_Previews: PreviewProvider {
     static var previews: some View {
         RestaurantPhotosView()
+            .previewLayout(.fixed(width: 800, height: 400))
     }
 }
