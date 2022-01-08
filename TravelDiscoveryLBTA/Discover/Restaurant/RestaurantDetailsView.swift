@@ -132,49 +132,58 @@ struct RestaurantDetailsView: View {
                 }.padding(.horizontal)
             }
             
-            HStack {
-                Text("Customer Reviews")
-                    .font(.system(size: 16, weight: .bold))
-                Spacer()
-            }.padding(.horizontal)
-            
             if let reviews = vm.details?.reviews {
-                ForEach(reviews, id: \.self) { review in
-                    VStack {
-                        HStack {
-                            KFImage(URL(string: review.user.profileImage))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 44)
-                                .clipShape(Circle())
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("\(review.user.firstName) \(review.user.lastName)")
-                                    .font(.system(size: 14, weight: .bold))
-                                HStack(spacing: 1) {
-                                    ForEach(0..<review.rating, id: \.self) { num in
-                                        Image(systemName: "star.fill")
-                                    }.foregroundColor(.orange)
-                                    
-                                    ForEach(0..<5 - review.rating, id: \.self) { num in
-                                        Image(systemName: "star.fill")
-                                    }.foregroundColor(.gray)
-                                }
-                                .font(.system(size: 12))
-                            }
-                            
-                            Spacer()
-                            Text("Dec 2021")
-                        }
-                        Text(review.text)
-                    }
-                    .padding(.top, 8)
-                    .padding(.horizontal)
-                }
+                ReviewList(reviews: reviews)
             }
-            
         }
         .navigationBarTitle("Restaurant Details", displayMode: .inline)
+    }
+}
+
+struct ReviewList: View {
+    
+    let reviews: [Review]
+    
+    var body: some View {
+        
+        HStack {
+            Text("Customer Reviews")
+                .font(.system(size: 16, weight: .bold))
+            Spacer()
+        }.padding(.horizontal)
+        
+            ForEach(reviews, id: \.self) { review in
+                VStack {
+                    HStack {
+                        KFImage(URL(string: review.user.profileImage))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 44)
+                            .clipShape(Circle())
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("\(review.user.firstName) \(review.user.lastName)")
+                                .font(.system(size: 14, weight: .bold))
+                            HStack(spacing: 1) {
+                                ForEach(0..<review.rating, id: \.self) { num in
+                                    Image(systemName: "star.fill")
+                                }.foregroundColor(.orange)
+                                
+                                ForEach(0..<5 - review.rating, id: \.self) { num in
+                                    Image(systemName: "star.fill")
+                                }.foregroundColor(.gray)
+                            }
+                            .font(.system(size: 12))
+                        }
+                        
+                        Spacer()
+                        Text("Dec 2021")
+                    }
+                    Text(review.text)
+                }
+                .padding(.top, 8)
+                .padding(.horizontal)
+            }
     }
 }
 
