@@ -153,7 +153,7 @@ struct ReviewList: View {
         }.padding(.horizontal)
         
             ForEach(reviews, id: \.self) { review in
-                VStack {
+                VStack (alignment: .leading) {
                     HStack {
                         KFImage(URL(string: review.user.profileImage))
                             .resizable()
@@ -178,8 +178,10 @@ struct ReviewList: View {
                         
                         Spacer()
                         Text("Dec 2021")
+                            .font(.system(size: 14, weight: .bold))
                     }
                     Text(review.text)
+                        .font(.system(size: 14, weight: .bold))
                 }
                 .padding(.top, 8)
                 .padding(.horizontal)
