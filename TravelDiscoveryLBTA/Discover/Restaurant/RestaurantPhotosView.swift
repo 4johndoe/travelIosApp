@@ -73,10 +73,27 @@ struct RestaurantPhotosView: View {
                 } else {
                     
                     ForEach(photosUrlStrings, id: \.self) { urlString in
-                        VStack {
+                        VStack(alignment: .leading, spacing: 8) {
                             KFImage(URL(string: urlString))
                                 .resizable()
                                 .scaledToFill()
+                            HStack {
+                                Image(systemName: "heart")
+                                Image(systemName: "bubble.right")
+                                Image(systemName: "paperplane")
+                                Spacer()
+                                Image(systemName: "bookmark")
+                            }.padding(.horizontal, 8)
+                                .font(.system(size: 22))
+                            
+                            Text("Description for your post and it does here, make sure to use a bunch of lines of test otherwise you never know what's going to happen.\n\nGreat job everyone.")
+                                .font(.system(size: 14))
+                                .padding(.horizontal, 8)
+                            
+                            Text("Posted on 11/4/21")
+                                .font(.system(size: 14))
+                                .padding(.horizontal, 8)
+                                .foregroundColor(.gray)
                         }.padding(.bottom)
                     }
                 }
