@@ -27,7 +27,7 @@
 		438478C2277F845000574C2A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438478C1277F845000574C2A /* Place.swift */; };
 		43B7CF99277BAF2F00DEB169 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF98277BAF2F00DEB169 /* Destination.swift */; };
 		43B7CF9B277BAF4800DEB169 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9A277BAF4800DEB169 /* Restaurant.swift */; };
-		43B7CF9D277BAF6800DEB169 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9C277BAF6800DEB169 /* Users.swift */; };
+		43B7CF9D277BAF6800DEB169 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9C277BAF6800DEB169 /* User.swift */; };
 		43B7CF9F277BAF7200DEB169 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B7CF9E277BAF7200DEB169 /* Category.swift */; };
 		43ECE98A277D073C00145B98 /* TileModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECE989277D073C00145B98 /* TileModifier.swift */; };
 /* End PBXBuildFile section */
@@ -51,7 +51,7 @@
 		438478C1277F845000574C2A /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		43B7CF98277BAF2F00DEB169 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		43B7CF9A277BAF4800DEB169 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		43B7CF9C277BAF6800DEB169 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		43B7CF9C277BAF6800DEB169 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		43B7CF9E277BAF7200DEB169 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		43ECE989277D073C00145B98 /* TileModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +127,7 @@
 			children = (
 				43B7CF98277BAF2F00DEB169 /* Destination.swift */,
 				43B7CF9A277BAF4800DEB169 /* Restaurant.swift */,
-				43B7CF9C277BAF6800DEB169 /* Users.swift */,
+				43B7CF9C277BAF6800DEB169 /* User.swift */,
 				43B7CF9E277BAF7200DEB169 /* Category.swift */,
 				438478C1277F845000574C2A /* Place.swift */,
 			);
@@ -252,7 +252,7 @@
 				433470A4277BAE3B0053EBE7 /* TrendingCreatorsView.swift in Sources */,
 				43ECE98A277D073C00145B98 /* TileModifier.swift in Sources */,
 				43B7CF9F277BAF7200DEB169 /* Category.swift in Sources */,
-				43B7CF9D277BAF6800DEB169 /* Users.swift in Sources */,
+				43B7CF9D277BAF6800DEB169 /* User.swift in Sources */,
 				433470A6277BAE550053EBE7 /* DiscoveryCategoriesView.swift in Sources */,
 				43464A042783809300C92794 /* DestinationHeaderContainer.swift in Sources */,
 				438478C2277F845000574C2A /* Place.swift in Sources */,
