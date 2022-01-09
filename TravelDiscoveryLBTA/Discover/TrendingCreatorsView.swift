@@ -30,7 +30,7 @@ struct TrendingCreatorsView: View {
                 HStack(alignment: .top, spacing: 12) {
                     ForEach(users, id: \.self) { user in
                         NavigationLink(
-                            destination: UserDetailsView(user: user),
+                            destination: NavigationLazyView(UserDetailsView(user: user)),
                             label: {
                                 DiscoverUserView(user: user)
                         })

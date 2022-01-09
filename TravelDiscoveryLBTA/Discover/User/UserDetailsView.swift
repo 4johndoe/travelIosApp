@@ -8,7 +8,49 @@
 import SwiftUI
 import Kingfisher
 
+// https://travel.letsbuildthatapp.com/travel_discovery/user?id=0
+
+struct UserDetails: Decodable {
+    let username, firstName, lastName, profileImage: String
+    let followers, following: Int
+    let posts: [Post]
+}
+
+struct Post: Decodable, Hashable {
+    let title, imageUrl, views: String
+    let hashtags: [String]
+}
+
+class UserDetailsViewModel: ObservableObject {
+    
+    @Published var userDetails: UserDetails?
+    
+    init() {
+        // network code
+        
+        guard let url = URL(string: "https://travel.letsbuildthatapp.com/travel_discovery/user?id=0") else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, resp, err) in
+            
+            DispatchQueue.main.async {
+                guard let data = data else { return }
+
+                do {
+                    self.userDetails = try JSONDecoder().decode(UserDetails.self, from: data)
+                } catch let jsonError {
+                    print("Decoding failed for UserDetails:", jsonError)
+                }
+            }
+            
+        }.resume()
+    }
+}
+
+
 struct UserDetailsView: View {
+    
+    @ObservedObject var vm = UserDetailsViewModel()
+    
     let user: User
     
     var body: some View {
@@ -87,9 +129,11 @@ struct UserDetailsView: View {
                 }
                 .font(.system(size: 14, weight: .semibold))
                 
-                ForEach(0..<10, id: \.self) { num in
-                    HStack {
-                        Spacer()
+                ForEach(vm.userDetails?.posts ?? [], id: \.self) { post in
+                    VStack {
+                        KFImage(URL(string: post.imageUrl))
+                            .resizable()
+                            .scaledToFill()
                     }
                         .frame(height: 200)
                         .background(Color(white: 0.8))
