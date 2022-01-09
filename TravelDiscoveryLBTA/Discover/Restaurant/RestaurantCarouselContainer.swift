@@ -11,12 +11,13 @@ import Kingfisher
 struct RestaurantCarouselContainer: UIViewControllerRepresentable {
     
     let imageUrlStrings: [String]
+    let selectedIndex: Int
     
     typealias UIViewControllerType = UIViewController
     
     func makeUIViewController(context: Context) -> UIViewController {
 
-        let pvc = CarouselPageViewController(imageNames: imageUrlStrings)
+        let pvc = CarouselPageViewController(imageNames: imageUrlStrings, selectedIndex: selectedIndex)
         return pvc
     }
     
@@ -32,7 +33,7 @@ class CarouselPageViewController: UIPageViewController, UIPageViewControllerData
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        0
+        self.selectedIndex
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -52,10 +53,11 @@ class CarouselPageViewController: UIPageViewController, UIPageViewControllerData
     }
     
     var allControllers: [UIViewController] = []
-
+    var selectedIndex: Int
     
-    init(imageNames: [String]) {
+    init(imageNames: [String], selectedIndex: Int) {
         
+        self.selectedIndex = selectedIndex
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.systemGray5
         UIPageControl.appearance().currentPageIndicatorTintColor = .purple
         
@@ -92,13 +94,13 @@ class CarouselPageViewController: UIPageViewController, UIPageViewControllerData
     }
 }
 
-struct RestaurantCarouselContainer_Previews: PreviewProvider {
-    static var previews: some View {
-        RestaurantCarouselContainer(imageUrlStrings: [
-            "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/7156c3c6-945e-4284-a796-915afdc158b5",
-            "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/b1642068-5624-41cf-83f1-3f6dff8c1702",
-            "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/6982cc9d-3104-4a54-98d7-45ee5d117531",
-            "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/2240d474-2237-4cd3-9919-562cd1bb439e",
-          ])
-    }
-}
+//struct RestaurantCarouselContainer_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RestaurantCarouselContainer(imageUrlStrings: [
+//            "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/7156c3c6-945e-4284-a796-915afdc158b5",
+//            "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/b1642068-5624-41cf-83f1-3f6dff8c1702",
+//            "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/6982cc9d-3104-4a54-98d7-45ee5d117531",
+//            "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/2240d474-2237-4cd3-9919-562cd1bb439e",
+//          ])
+//    }
+//}

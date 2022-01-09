@@ -43,6 +43,7 @@ struct RestaurantPhotosView: View {
     }
     
     @State var shouldShowFullscreenModal = false
+    @State var selectedPhotoIndex = 0
     
     var body: some View {
         GeometryReader { proxy in
@@ -55,7 +56,7 @@ struct RestaurantPhotosView: View {
                             ZStack(alignment: .topLeading) {
                                 Color.black.ignoresSafeArea()
                                 
-                                RestaurantCarouselContainer(imageUrlStrings: photosUrlStrings)
+                                RestaurantCarouselContainer(imageUrlStrings: photosUrlStrings, selectedIndex: selectedPhotoIndex)
                                 
                                 Button(action: {
                                     shouldShowFullscreenModal.toggle()
@@ -86,6 +87,9 @@ struct RestaurantPhotosView: View {
                             ForEach(photosUrlStrings, id: \.self) { photo in
                                 
                                 Button(action: {
+                                    
+                                    self.selectedPhotoIndex = photosUrlStrings.firstIndex(of: photo) ?? 0
+                                    
                                     shouldShowFullscreenModal.toggle()
                                 }, label: {
                                     
