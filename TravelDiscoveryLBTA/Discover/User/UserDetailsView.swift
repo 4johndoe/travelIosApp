@@ -13,25 +13,54 @@ struct UserDetailsView: View {
     
     var body: some View {
         ScrollView {
-            Image(user.imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 60)
-                .clipShape(Circle())
-                .shadow(radius: 10)
-                .padding()
             
-            Text(user.name)
-                .font(.system(size: 14, weight: .semibold))
-            
-            HStack {
-                Text("@amyadams20 •")
-                    .font(.system(size: 12, weight: .regular))
-                Image(systemName: "hand.thumbsup.fill")
-                    .font(.system(size: 10, weight: .semibold))
-                Text("2541")
+            VStack(spacing: 16) {
+                
+                Image(user.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 60)
+                    .clipShape(Circle())
+                    .shadow(radius: 10)
+                    .padding(.horizontal)
+                    .padding(.top)
+                
+                Text(user.name)
+                    .font(.system(size: 14, weight: .semibold))
+                
+                HStack {
+                    Text("@amyadams20 •")
+                    Image(systemName: "hand.thumbsup.fill")
+                        .font(.system(size: 10, weight: .semibold))
+                    Text("2541")
+                }
+                .font(.system(size: 12, weight: .regular))
+                
+                Text("YouTuber, Vlogger, Travel Creator")
+                    .font(.system(size: 14, weight: .regular))
+                    .foregroundColor(Color(.lightGray))
+                
+                HStack (spacing: 12) {
+                    VStack {
+                        Text("59,394")
+                            .font(.system(size: 13, weight: .semibold))
+                        Text("Followers")
+                            .font(.system(size: 9, weight: .regular))
+                    }
+                    
+                    Spacer()
+                        .frame(width: 0.5, height: 10)
+                        .background(Color(.lightGray))
+                    
+                    VStack {
+                        Text("2,112")
+                            .font(.system(size: 13, weight: .semibold))
+                        Text("Following")
+                            .font(.system(size: 9, weight: .regular))
+                    }
+                }
             }
-//            KFImage(URL(string: user.imageName))
+
         }.navigationBarTitle(user.name, displayMode: .inline)
     }
 }
