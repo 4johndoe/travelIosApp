@@ -43,16 +43,6 @@ struct TrendingCreatorsView: View {
     }
 }
 
-struct UserDetailsView: View {
-    let user: User
-    
-    var body: some View {
-        ScrollView {
-            Text("\(user.name)")
-        }.navigationBarTitle("Username", displayMode: .inline)
-    }
-}
-
 struct DiscoverUserView: View {
     
     let user: User
