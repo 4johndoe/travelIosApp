@@ -59,7 +59,35 @@ struct UserDetailsView: View {
                             .font(.system(size: 9, weight: .regular))
                     }
                 }
-            }
+                
+                HStack (spacing: 12) {
+                    Button(action: {}, label: {
+                        HStack {
+                            Spacer()
+                            Text("Follow")
+                                .foregroundColor(Color(.white))
+                            Spacer()
+                        }
+                        .padding(.vertical, 8)
+                        .background(Color.orange)
+                        .cornerRadius(100)
+                    })
+                    
+                    Button(action: {}, label: {
+                        HStack {
+                            Spacer()
+                            Text("Contact")
+                                .foregroundColor(Color(.black))
+                            Spacer()
+                        }
+                        .padding(.vertical, 8)
+                        .background(Color(white: 0.9))
+                        .cornerRadius(100)
+                    })
+                }
+                .font(.system(size: 14, weight: .semibold))
+                 
+            }.padding(.horizontal)
 
         }.navigationBarTitle(user.name, displayMode: .inline)
     }
