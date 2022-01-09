@@ -16,7 +16,7 @@ struct RestaurantCarouselContainer: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
 
-        let pvc = CustomPageViewController(imageNames: imageUrlStrings)
+        let pvc = CarouselPageViewController(imageNames: imageUrlStrings)
         return pvc
     }
     
