@@ -80,10 +80,13 @@ class CarouselPageViewController: UIPageViewController, UIPageViewControllerData
             return hostingController
         })
         
-        if let first = allControllers.first {
-            
-            setViewControllers([first], direction: .forward, animated: true, completion: nil)
+        if selectedIndex < allControllers.count {
+            setViewControllers([allControllers[selectedIndex]], direction: .forward, animated: true, completion: nil)
         }
+        
+//        if let first = allControllers.first {
+//            setViewControllers([first], direction: .forward, animated: true, completion: nil)
+//        }
         
         self.dataSource = self
         self.delegate = self

@@ -68,6 +68,7 @@ struct RestaurantPhotosView: View {
                                 })
                             }
                         })
+                    .opacity(shouldShowFullscreenModal ? 1 : 0)
                 
                 // GRID
                 
