@@ -86,6 +86,16 @@ struct UserDetailsView: View {
                     })
                 }
                 .font(.system(size: 14, weight: .semibold))
+                
+                ForEach(0..<10, id: \.self) { num in
+                    HStack {
+                        Spacer()
+                    }
+                        .frame(height: 200)
+                        .background(Color(white: 0.8))
+                        .cornerRadius(12)
+                        .shadow(color: .init(white: 0.8), radius: 5, x: 8, y: 4)
+                }
                  
             }.padding(.horizontal)
 
