@@ -19,6 +19,8 @@ struct DiscoverView: View {
         ]
     }
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         
         NavigationView {
@@ -55,7 +57,8 @@ struct DiscoverView: View {
                         PopularRestaurantsView()
                         
                         TrendingCreatorsView()
-                    }.background(Color.discoverBackground)
+
+                    }.background(colorScheme == .light ? Color.white : Color.black)
                         .cornerRadius(16)
                         .padding(.top, 32)
                 }
@@ -70,5 +73,8 @@ struct DiscoverView: View {
 struct DiscoverView_Previews: PreviewProvider {
     static var previews: some View {
         DiscoverView()
+            .colorScheme(.dark)
+        DiscoverView()
+            .colorScheme(.light)
     }
 }
