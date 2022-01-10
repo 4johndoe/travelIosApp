@@ -25,10 +25,10 @@ class UserDetailsViewModel: ObservableObject {
     
     @Published var userDetails: UserDetails?
     
-    init() {
+    init(userId: Int) {
         // network code
         
-        guard let url = URL(string: "https://travel.letsbuildthatapp.com/travel_discovery/user?id=0") else { return }
+        guard let url = URL(string: "https://travel.letsbuildthatapp.com/travel_discovery/user?id=\(userId)") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, resp, err) in
             
@@ -49,9 +49,15 @@ class UserDetailsViewModel: ObservableObject {
 
 struct UserDetailsView: View {
     
-    @ObservedObject var vm = UserDetailsViewModel()
+    @ObservedObject var vm: UserDetailsViewModel
     
     let user: User
+    
+    init(user: User) {
+        
+        self.user = user
+        self.vm = .init(userId: user.id)
+    }
     
     var body: some View {
         ScrollView {
@@ -71,7 +77,7 @@ struct UserDetailsView: View {
                     .font(.system(size: 14, weight: .semibold))
                 
                 HStack {
-                    Text("@amyadams20 •")
+                    Text("@\(self.vm.userDetails?.username ?? "") •")
                     Image(systemName: "hand.thumbsup.fill")
                         .font(.system(size: 10, weight: .semibold))
                     Text("2541")
@@ -138,7 +144,8 @@ struct UserDetailsView: View {
                             .clipped()
                         
                         HStack {
-                            Image("amy")
+                            KFImage(URL(string: vm.userDetails!.profileImage)) // todo fix
+//                            Image("amy")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 34)
@@ -146,18 +153,19 @@ struct UserDetailsView: View {
                             
                             VStack(alignment: .leading) {
                                 
-                                Text("Here is my post title")
+                                Text(post.title)
                                     .font(.system(size: 13, weight: .semibold))
+                                    .shadow(color: .gray, radius: 5, x: 0, y: 5)
                                 
-                                Text("500k views")
+                                Text("\(post.views) views")
                                     .font(.system(size: 12, weight: .semibold))
                                     .foregroundColor(.gray)
                             }
                         }.padding(.horizontal, 8)
                         
                         HStack {
-                            ForEach(0..<3, id: \.self) { num in
-                                Text("#Traveling")
+                            ForEach(post.hashtags, id: \.self) { hashtag in
+                                Text("#\(hashtag)")
                                     .foregroundColor(Color.blue)
                                     .font(.system(size: 14, weight: .semibold))
                                     .padding(.horizontal, 12)
@@ -165,7 +173,8 @@ struct UserDetailsView: View {
                                     .background(Color(white: 0.9))
                                     .cornerRadius(20)
                             }
-                        }
+                        }.padding(.horizontal, 8)
+                        .padding(.bottom, 8)
                     }
                         .background(Color(white: 1))
                         .cornerRadius(12)
@@ -180,8 +189,9 @@ struct UserDetailsView: View {
 
 struct UserDetailsView_Previews: PreviewProvider {
     static var previews: some View {
+        DiscoverView()
         NavigationView{
-            UserDetailsView(user: .init(name: "Amy Adams", imageName: "amy"))
+            UserDetailsView(user: .init(id: 0, name: "Amy Adams", imageName: "amy"))
         }
     }
 }
