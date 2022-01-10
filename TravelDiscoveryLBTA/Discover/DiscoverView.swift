@@ -9,6 +9,7 @@ import SwiftUI
 
 extension Color {
     static let discoverBackground = Color(.init(gray: 0.95, alpha: 1))
+    static let defaultBackground = Color("defaultBackground")
 }
 
 struct DiscoverView: View {
@@ -58,7 +59,7 @@ struct DiscoverView: View {
                         
                         TrendingCreatorsView()
 
-                    }.background(colorScheme == .light ? Color.white : Color.black)
+                    }.background(Color.defaultBackground)
                         .cornerRadius(16)
                         .padding(.top, 32)
                 }

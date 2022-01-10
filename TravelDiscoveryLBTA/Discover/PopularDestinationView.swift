@@ -241,10 +241,6 @@ struct PopularDestinationTile: View {
 
 struct PopularDestinationView_Previews: PreviewProvider {
     static var previews: some View {
-        DiscoverView()
-//        PopularDestinationView()
-//        NavigationView {
-//            PopularDestinationDetailsView(destination: .init(name: "Paris" ,country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235  ))
-//        }
+        PopularDestinationView()
     }
 }

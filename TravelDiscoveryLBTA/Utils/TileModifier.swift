@@ -19,7 +19,7 @@ struct TileModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .background(Color.white)
+            .background(Color("tileBackground"))
             .cornerRadius(5)
             .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
     }
